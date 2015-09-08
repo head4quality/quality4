@@ -15,9 +15,10 @@ import org.openqa.selenium.support.ui.Select;
 import org.sikuli.script.Finder;
 import org.sikuli.script.Screen;
 
-public class Aserciones extends PageObject {
+public class Aserciones {
+	private WebDriver driver;
 	public Aserciones(WebDriver driver) {
-		super(driver);
+		this.driver= driver;
 	}
 
 	public static void verificarEstado(WebElement elemento, String estado, int tiempo) throws InterruptedException {
