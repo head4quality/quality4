@@ -1,5 +1,5 @@
 /pom.xml
 target/
 .settings/
-src/main/javascript/node_modules
+src/main/javascript/creadorDeEscenarios/node_modules/
 src/main/javascript/creadorDeEscenarios/db
