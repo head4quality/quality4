@@ -1,6 +1,9 @@
 package common.selenium;
 import java.util.List;
 import org.junit.*;
+
+import static Prueba.asdas.TeclaS.Abajo;
+import static Prueba.asdas.TeclaS.Enter;
 import static org.junit.Assert.fail;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
@@ -144,7 +147,7 @@ public class Acciones{
 	
 	public static String obtenerValorCombo(WebElement combo, int tiempo) throws InterruptedException{
 		for (int i=0; i<=tiempo*10; i++){
-			try{
+			try{ 
 				Thread.sleep(100);
 				return new Select(combo).getFirstSelectedOption().getText();
 			}
@@ -372,6 +375,97 @@ public class Acciones{
 	
 	public static void sendKeys(String imagen, String texto) throws InterruptedException{
 		sendKeys(imagen, texto, 10);
+	}
+	
+	public static void move(String imagen, int tiempo) throws Exception{
+		Screen s = new Screen();
+		for (int i=0; i<=tiempo*10; i++){
+			try{
+				Thread.sleep(100);
+				s.mouseMove(imagen);
+				break;
+			}
+			catch(Exception e){
+				if(i==tiempo*10){
+					if (e instanceof NoSuchElementException)
+						fail("No se encontro el elemento para realizar el Click: ");
+					else 
+						throw e;
+				}
+			}
+		}
+	}
+	
+	public static void move(String imagen) throws Exception{
+		move(imagen, 10);
+	}
+	
+	public static void selectByIndex(String imagen, int indice, int tiempo) throws Exception{
+		Screen s = new Screen();
+		for (int i=0; i<=tiempo*10; i++){
+			try{
+				Thread.sleep(100);
+				s.click(imagen);
+				for (int j=1; j<=indice; j++){
+					Abajo();
+				}
+				Enter();
+				break;
+			}catch(Exception e){
+				if (tiempo*10==i){
+					if (e instanceof NoSuchElementException)
+						fail("No se encontro la opcion del combo con indice "+ indice);
+					else
+						throw e;
+				}
+			}
+		}		
+	}
+	
+	public static void selectByIndex(String imagen, int indice) throws Exception{
+		selectByIndex(imagen, indice, 10);
+	}
+	
+	public static void clickDerecho(String imagen) throws Exception{
+		Screen s = new Screen();
+		for (int i=0; i<=100; i++){
+			try{
+				Thread.sleep(100);
+				s.rightClick(imagen);
+				break;
+			}
+			catch(Exception e){
+				if(i==100){
+					if (e instanceof NoSuchElementException)
+						fail("No se encontro el elemento para realizar el Click: ");
+					else 
+						throw e;
+				}
+			}
+		}
+	}
+	
+	public static void clickDerecho(String imagen, int opcion) throws Exception{
+		Screen s = new Screen();
+		for (int i=0; i<=100; i++){
+			try{
+				Thread.sleep(100);
+				s.rightClick(imagen);
+				for (int j=1; j<=opcion; j++){
+					Abajo();
+				}
+				Enter();
+				break;
+			}
+			catch(Exception e){
+				if(i==100){
+					if (e instanceof NoSuchElementException)
+						fail("No se encontro el elemento para realizar el Click: ");
+					else 
+						throw e;
+				}
+			}
+		}
 	}
 	
 }
