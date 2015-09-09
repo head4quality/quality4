@@ -1,17 +1,16 @@
 package common.selenium;
 
-import java.io.IOException;
-import java.util.List;
-
+import static common.selenium.Acciones.informacionDeElemento;
+import static common.selenium.Acciones.obtenerValorCombo;
+import static common.selenium.Acciones.obtenerValorEtiqueta;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
-//import static eBanking.pageObjects.Acciones.*;
-import org.openqa.selenium.By;
+
+import java.io.IOException;
+
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.Select;
 import org.sikuli.script.Finder;
 import org.sikuli.script.Screen;
 

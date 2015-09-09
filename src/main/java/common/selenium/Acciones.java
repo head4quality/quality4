@@ -352,7 +352,8 @@ public class Acciones{
 		seleccionarCombo(combo, opcion, 10);
 	}
 	
-	public static void sendKeys(String imagen, String texto, int tiempo) throws InterruptedException{
+	public static void sendKeys(String imagen, String texto, int tiempo) throws Exception{
+		Screen s = new Screen();
 		for (int i=0; i<=tiempo*10; i++){
 			try{
 				Thread.sleep(100);
@@ -370,7 +371,7 @@ public class Acciones{
 		}		
 	}
 	
-	public static void sendKeys(String imagen, String texto) throws InterruptedException{
+	public static void sendKeys(String imagen, String texto) throws Exception{
 		sendKeys(imagen, texto, 10);
 	}
 	
