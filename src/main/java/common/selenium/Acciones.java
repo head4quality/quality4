@@ -2,8 +2,7 @@ package common.selenium;
 import java.util.List;
 import org.junit.*;
 
-import static Prueba.asdas.TeclaS.Abajo;
-import static Prueba.asdas.TeclaS.Enter;
+import static common.selenium.Teclas.*;
 import static org.junit.Assert.fail;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;

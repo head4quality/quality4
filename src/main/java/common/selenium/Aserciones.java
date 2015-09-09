@@ -5,7 +5,8 @@ import java.util.List;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
-//import static eBanking.pageObjects.Acciones.*;
+import static common.selenium.Teclas.*;
+import static common.selenium.Acciones.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
