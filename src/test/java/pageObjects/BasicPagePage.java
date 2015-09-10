@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class BasicPagePageObject {
+public class BasicPagePage {
 
 	private WebDriver driver;
 
@@ -17,7 +17,7 @@ public class BasicPagePageObject {
 	@FindBy(name = "text") WebElement text;
 	@FindBy(name = "select") WebElement select;
 	
-	public BasicPagePageObject(WebDriver driver) {
+	public BasicPagePage(WebDriver driver) {
 		this.driver=driver;
 		PageFactory.initElements(this.driver, this);
 		elements = new HashMap<>();

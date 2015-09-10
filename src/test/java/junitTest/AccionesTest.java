@@ -12,7 +12,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-import pageObjects.BasicPagePageObject;
+import pageObjects.BasicPagePage;
 
 public class AccionesTest {
 	
@@ -28,7 +28,7 @@ public class AccionesTest {
 	private String url="file:///home/gonzalo/workspace/quality4/src/test/resources/basicPage.html";
 	
 	//Page Object de la pagina de prueba	
-	BasicPagePageObject pageObject;
+	BasicPagePage pageObject;
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -43,7 +43,7 @@ public class AccionesTest {
 	@Before
 	public void setUp() throws Exception {
 		driver.get(url);
-		pageObject = new BasicPagePageObject(driver);
+		pageObject = new BasicPagePage(driver);
 	}
 
 	@After
