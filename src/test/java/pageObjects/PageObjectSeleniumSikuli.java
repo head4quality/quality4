@@ -27,12 +27,32 @@ public class PageObjectSeleniumSikuli {
 	}
 	
 	/**
+	 * Retorna un boolean si el elemento existe 
+	 * @param clave a buscar en el mapa de elementos de SELENIUM
+	 * @return true si existe el elemento, false si no
+	 */
+	public boolean existeElementoSelenium(String clave){
+		return this.mapaDeElementosSelenium.containsKey(clave);
+	}
+	
+	/**
+	 * Retorna un boolean si el elemento existe 
+	 * @param clave a buscar en el mapa de elementos de SIKULI
+	 * @return true si existe el elemento, false si no
+	 */
+	public boolean existeElementoSikuli(String clave){
+		return this.mapaDeElementosSikuli.containsKey(clave);
+	}
+	
+	/**
 	 * Retorna el WebElement coincidente
 	 * @param clave a buscar en el mapa de elementos de SELENIUM
 	 * @return elemento coincidente
 	 */
 	public WebElement obtenerElementoSelenium(String clave){
-		return this.mapaDeElementosSelenium.get(clave);
+		if (existeElementoSelenium(clave))
+			return this.mapaDeElementosSelenium.get(clave);
+		return null;
 	}
 	
 	/**
@@ -41,7 +61,9 @@ public class PageObjectSeleniumSikuli {
 	 * @return ruta a la imagen del elemento
 	 */
 	public String obtenerElementoSikuli(String clave){
-		return this.mapaDeElementosSikuli.get(clave);
+		if (existeElementoSikuli(clave))
+			return this.mapaDeElementosSikuli.get(clave);
+		return null;
 	}
 	
 }
