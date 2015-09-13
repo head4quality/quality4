@@ -21,12 +21,6 @@
 			<version>${cucumber.version}</version>
 			<scope>test</scope>
 		</dependency>
-		<!--dependency>
-			<groupId>info.cukes</groupId>
-			<artifactId>cucumber-pro</artifactId>
-			<version>1.0.6</version>
-			<scope>test</scope>
-		</dependency-->
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
@@ -53,6 +47,11 @@
 			<artifactId>sikuli-core</artifactId>
 			<version>1.2.2</version>
 		</dependency>
+		<dependency>
+		<groupId>org.sikuli</groupId>
+                 <artifactId>sikuli-java</artifactId>
+                 <version>1.0.1</version>
+                </dependency>
 	</dependencies>
 </project>
 
