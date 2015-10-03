@@ -1,4 +1,29 @@
-//package common;
+package h4quality;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+
+public class RunDriver{
+	
+	private static WebDriver driver;
+
+	/**Retorna el driver estatico que se utiliza hasta el final de la prueba
+	 * lo instancia si es null
+	 * 
+	 * @return driver presente en la maquina local o ejecutado con grid
+	 */
+	public static WebDriver getDriver(){
+		if (driver==null){
+			//TODO Funcion que instancie el driver local o remoto
+			driver=new FirefoxDriver();
+			driver.manage().window().maximize();
+			
+		}
+		return driver;
+	}
+}
+
 //
 //import java.io.File;
 //import java.net.URL;
