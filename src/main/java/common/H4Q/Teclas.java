@@ -1,11 +1,8 @@
-package common.selenium;
+package common.H4Q;
 
 import java.util.NoSuchElementException;
 import static org.junit.Assert.*;
-
-import org.sikuli.*;
 import org.sikuli.api.robot.Key;
-import org.sikuli.script.FindFailed;
 import org.sikuli.script.Screen;
 
 public class Teclas {
@@ -21,7 +18,7 @@ public class Teclas {
 			catch(Exception e){
 				if(i==tiempo*10){
 					if (e instanceof NoSuchElementException)
-						fail("No es posible realizar la acción");
+						fail("No es posible presionar la tecla ENTER");
 					else 
 						throw e;
 				}
@@ -44,7 +41,7 @@ public class Teclas {
 			catch(Exception e){
 				if(i==tiempo*10){
 					if (e instanceof NoSuchElementException)
-						fail("No es posible realizar la acción");
+						fail("No es posible presionar la tecla CTRL");
 					else 
 						throw e;
 				}
@@ -67,7 +64,7 @@ public class Teclas {
 			catch(Exception e){
 				if(i==tiempo*10){
 					if (e instanceof NoSuchElementException)
-						fail("No es posible realizar la acción");
+						fail("No es posible presionar la tecla SHIFT");
 					else 
 						throw e;
 				}
@@ -91,7 +88,7 @@ public class Teclas {
 			catch(Exception e){
 				if(i==tiempo*10){
 					if (e instanceof NoSuchElementException)
-						fail("No es posible realizar la acción");
+						fail("No es posible presionar la tecla TAB");
 					else 
 						throw e;
 				}
@@ -114,7 +111,7 @@ public class Teclas {
 			catch(Exception e){
 				if(i==tiempo*10){
 					if (e instanceof NoSuchElementException)
-						fail("No es posible realizar la acción");
+						fail("No es posible presionar la tecla ESC");
 					else 
 						throw e;
 				}
@@ -137,7 +134,7 @@ public class Teclas {
 			catch(Exception e){
 				if(i==tiempo*10){
 					if (e instanceof NoSuchElementException)
-						fail("No es posible realizar la acción");
+						fail("No es posible presionar la tecla INSERT");
 					else 
 						throw e;
 				}
@@ -160,7 +157,7 @@ public class Teclas {
 			catch(Exception e){
 				if(i==tiempo*10){
 					if (e instanceof NoSuchElementException)
-						fail("No es posible realizar la acción");
+						fail("No es posible presionar la tecla PAUSE");
 					else 
 						throw e;
 				}
@@ -170,6 +167,29 @@ public class Teclas {
 	
 	public static void Pause() throws Exception{
 		Pause(3);
+	}
+	
+	public static void Delete(int tiempo) throws Exception{
+		Screen s = new Screen();
+		for (int i=0; i<=tiempo*10; i++){
+			try{
+				Thread.sleep(100);
+				s.type(Key.DELETE);
+				break;
+			}
+			catch(Exception e){
+				if(i==tiempo*10){
+					if (e instanceof NoSuchElementException)
+						fail("No es posible presionar la tecla PAUSE");
+					else 
+						throw e;
+				}
+			}
+		}
+	}
+	
+	public static void Delete() throws Exception{
+		Delete(3);
 	}
 	
 	public static void F1(int tiempo) throws Exception{
@@ -183,7 +203,7 @@ public class Teclas {
 			catch(Exception e){
 				if(i==tiempo*10){
 					if (e instanceof NoSuchElementException)
-						fail("No es posible realizar la acción");
+						fail("No es posible presionar la tecla F1");
 					else 
 						throw e;
 				}
@@ -206,7 +226,7 @@ public class Teclas {
 			catch(Exception e){
 				if(i==tiempo*10){
 					if (e instanceof NoSuchElementException)
-						fail("No es posible realizar la acción");
+						fail("No es posible presionar la tecla F2");
 					else 
 						throw e;
 				}
@@ -229,7 +249,7 @@ public class Teclas {
 			catch(Exception e){
 				if(i==tiempo*10){
 					if (e instanceof NoSuchElementException)
-						fail("No es posible realizar la acción");
+						fail("No es posible presionar la tecla F3");
 					else 
 						throw e;
 				}
@@ -252,7 +272,7 @@ public class Teclas {
 			catch(Exception e){
 				if(i==tiempo*10){
 					if (e instanceof NoSuchElementException)
-						fail("No es posible realizar la acción");
+						fail("No es posible presionar la tecla F4");
 					else 
 						throw e;
 				}
@@ -275,7 +295,7 @@ public class Teclas {
 			catch(Exception e){
 				if(i==tiempo*10){
 					if (e instanceof NoSuchElementException)
-						fail("No es posible realizar la acción");
+						fail("No es posible presionar la tecla F5");
 					else 
 						throw e;
 				}
@@ -298,7 +318,7 @@ public class Teclas {
 			catch(Exception e){
 				if(i==tiempo*10){
 					if (e instanceof NoSuchElementException)
-						fail("No es posible realizar la acción");
+						fail("No es posible presionar la tecla F6");
 					else 
 						throw e;
 				}
@@ -321,7 +341,7 @@ public class Teclas {
 			catch(Exception e){
 				if(i==tiempo*10){
 					if (e instanceof NoSuchElementException)
-						fail("No es posible realizar la acción");
+						fail("No es posible presionar la tecla F7");
 					else 
 						throw e;
 				}
@@ -344,7 +364,7 @@ public class Teclas {
 			catch(Exception e){
 				if(i==tiempo*10){
 					if (e instanceof NoSuchElementException)
-						fail("No es posible realizar la acción");
+						fail("No es posible presionar la tecla F8");
 					else 
 						throw e;
 				}
@@ -367,7 +387,7 @@ public class Teclas {
 			catch(Exception e){
 				if(i==tiempo*10){
 					if (e instanceof NoSuchElementException)
-						fail("No es posible realizar la acción");
+						fail("No es posible presionar la tecla F9");
 					else 
 						throw e;
 				}
@@ -390,7 +410,7 @@ public class Teclas {
 			catch(Exception e){
 				if(i==tiempo*10){
 					if (e instanceof NoSuchElementException)
-						fail("No es posible realizar la acción");
+						fail("No es posible presionar la tecla F10");
 					else 
 						throw e;
 				}
@@ -413,7 +433,7 @@ public class Teclas {
 			catch(Exception e){
 				if(i==tiempo*10){
 					if (e instanceof NoSuchElementException)
-						fail("No es posible realizar la acción");
+						fail("No es posible presionar la tecla F11");
 					else 
 						throw e;
 				}
@@ -436,7 +456,7 @@ public class Teclas {
 			catch(Exception e){
 				if(i==tiempo*10){
 					if (e instanceof NoSuchElementException)
-						fail("No es posible realizar la acción");
+						fail("No es posible presionar la tecla F12");
 					else 
 						throw e;
 				}
@@ -459,7 +479,7 @@ public class Teclas {
 			catch(Exception e){
 				if(i==tiempo*10){
 					if (e instanceof NoSuchElementException)
-						fail("No es posible realizar la acción");
+						fail("No es posible presionar la tecla LEFT");
 					else 
 						throw e;
 				}
@@ -482,7 +502,7 @@ public class Teclas {
 			catch(Exception e){
 				if(i==tiempo*10){
 					if (e instanceof NoSuchElementException)
-						fail("No es posible realizar la acción");
+						fail("No es posible presionar la tecla RIGTH");
 					else 
 						throw e;
 				}
@@ -505,7 +525,7 @@ public class Teclas {
 			catch(Exception e){
 				if(i==tiempo*10){
 					if (e instanceof NoSuchElementException)
-						fail("No es posible realizar la acción");
+						fail("No es posible presionar la tecla UP");
 					else 
 						throw e;
 				}
@@ -528,7 +548,7 @@ public class Teclas {
 			catch(Exception e){
 				if(i==tiempo*10){
 					if (e instanceof NoSuchElementException)
-						fail("No es posible realizar la acción");
+						fail("No es posible presionar la tecla DOWN");
 					else 
 						throw e;
 				}
