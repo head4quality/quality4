@@ -174,7 +174,7 @@ public class Teclas {
 		for (int i=0; i<=tiempo*10; i++){
 			try{
 				Thread.sleep(100);
-				s.type(Key.DELETE);
+				s.type(Key.BACKSPACE);
 				break;
 			}
 			catch(Exception e){

@@ -4,6 +4,8 @@ import org.openqa.selenium.By;
 //import org.openqa.selenium.OutputType;
 //import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
 import static org.junit.Assert.*;
 //import cucumber.api.Scenario;
 //import cucumber.api.java.After;
@@ -29,6 +31,12 @@ public class Pasos {
 	@Given("^cargar elementos con propertie \"(.*?)\"$")
 	public void cargar_elementos_con_propertie(String propertie) throws Throwable {
 		page= new TablaDeElementos(propertie);
+	}
+	
+	@Given("^abrir driver$")
+	public void abrir_driver(){
+		this.driver = new FirefoxDriver();
+		this.driver.manage().window().maximize();
 	}
 	
 	@When("^click en \"(.*?)\"$")
@@ -188,7 +196,7 @@ public class Pasos {
 		Teclas.Pause();
 	}
 	
-	@When("^presionar boton DELETE$")
+	@When("^presionar boton BACKSPACE$")
 	public void presionar_boton_DELETE()throws Throwable {
 		Teclas.Delete();
 	}

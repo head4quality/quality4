@@ -21,7 +21,7 @@ public class TablaDeElementos {
 	}
 
 	public boolean es_imagen(String elemento){
-		if (elementos.getProperty(elemento).contains("/"))
+		if (elemento.contains("/"))
 			return true;
 		return false;
 	}

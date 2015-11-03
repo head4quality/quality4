@@ -42,6 +42,11 @@
 			<artifactId>sikuli-core</artifactId>
 			<version>1.2.2</version>
 		</dependency>
+		<dependency>
+			<groupId>info.cukes</groupId>
+			<artifactId>cucumber-junit</artifactId>
+			<version>1.2.4</version>
+		</dependency>
 	</dependencies>
 </project>
 
