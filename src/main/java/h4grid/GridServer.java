@@ -12,4 +12,6 @@ import javax.jws.soap.SOAPBinding.Style;
 public interface GridServer {
 
 	@WebMethod void abrirDriver();
+	
+	@WebMethod void click(String elemento) throws Exception;
 }
