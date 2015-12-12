@@ -11,6 +11,7 @@ public class GridServerImplementation implements GridServer{
 
 	@Override
 	public void abrirDriver() {
+		System.out.println("Abriendo Driver");
 		this.driver = new FirefoxDriver();
 		this.driver.manage().window().maximize();
 	}
