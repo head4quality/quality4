@@ -219,16 +219,21 @@ var report = [
   }
 ]
 
+
+/**
+ * Present de json cucumber report on HTML table
+ */
 var parseReport = function(){
-	featuresTable = $('<table/>');
+	featuresTable = $('#featuresTable');
 	for(var i=0; i<report.length; i++){
 		var totalFeaturesTime = 0;
 		var featureRow = $('<tr/>');
 		var casesFailed = 0;
+		var casesPassed = 0;
 		var scenarios = report[i].elements;
 		var columnName = $('<td/>').html(report[i].name);
 		featureRow.append(columnName);
-		var columnTotalScenarios = $('<td/>').html(scenarios.length);
+		var columnTotalScenarios = $('<td class="centred"/>').html(scenarios.length);
 		featureRow.append(columnTotalScenarios);		
 		for (var j=0; j<scenarios.length; j++){
 			var steps = scenarios[j].steps;
@@ -239,11 +244,16 @@ var parseReport = function(){
 				if (steps[k].result.status=='failed'){
 					casesFailed++;	
 				}
-			}
-		}
-		var totalTimeColumn = $('<td/>').html(totalFeaturesTime);
+			}			
+		}	
+		casesPassed = scenarios.length - casesFailed;
+		var failedColumn = $('<td class="centred"/>').html(casesFailed);
+		var passedColumn = $('<td class="centred"/>').html(casesPassed);
+		var totalTimeColumn = $('<td class="centred"/>').html(totalFeaturesTime);
+		featureRow.append(failedColumn);
+		featureRow.append(passedColumn);
 		featureRow.append(totalTimeColumn);
-		featuresTable.append(featureRow);
+		featuresTable.append(featureRow);		
 	}
 	$('body').append(featuresTable);
 }

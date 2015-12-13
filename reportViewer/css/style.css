@@ -1,0 +1,9 @@
+@CHARSET "UTF-8";
+
+td.centred{
+	    text-align: center;
+}
+
+#featuresTable th {
+	padding:5px;
+}
