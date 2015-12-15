@@ -1,21 +1,20 @@
-package common.selenium;
+package h4quality;
 
-import java.io.IOException;
-import java.util.List;
-
+import static h4quality.Acciones.obtenerValorCombo;
+import static h4quality.Acciones.obtenerValorEtiqueta;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
-//import static eBanking.pageObjects.Acciones.*;
-import org.openqa.selenium.By;
+
+import java.io.IOException;
+
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.Select;
 import org.sikuli.script.Finder;
 import org.sikuli.script.Screen;
 
 public class Aserciones {
+	@SuppressWarnings("unused")
 	private WebDriver driver;
 	public Aserciones(WebDriver driver) {
 		this.driver= driver;
@@ -112,7 +111,7 @@ public class Aserciones {
 				assertTrue(!elemento.isDisplayed());
 			} catch (Exception | AssertionError e) {
 				if (e instanceof AssertionError)
-					fail("Se muestra el elemento: " + informacionDeElemento(elemento));
+					fail("Se muestra el elemento" );
 				else if (!(e instanceof NoSuchElementException))
 					throw e;
 			}
@@ -188,6 +187,7 @@ public class Aserciones {
 			for(int i=0; i<=tiempo*10; i++){
 				try{
 					Thread.sleep(100);
+					System.out.println(existeElemento(imagen));
 					assertTrue(existeElemento(imagen));
 				}catch(Exception | AssertionError e){
 					if (e instanceof AssertionError)

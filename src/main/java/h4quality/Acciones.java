@@ -1,7 +1,8 @@
-package common.selenium;
-import java.util.List;
-import org.junit.*;
+package h4quality;
 import static org.junit.Assert.fail;
+
+import java.util.List;
+import static h4quality.Teclas.*;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -144,7 +145,7 @@ public class Acciones{
 	
 	public static String obtenerValorCombo(WebElement combo, int tiempo) throws InterruptedException{
 		for (int i=0; i<=tiempo*10; i++){
-			try{
+			try{ 
 				Thread.sleep(100);
 				return new Select(combo).getFirstSelectedOption().getText();
 			}
@@ -233,18 +234,6 @@ public class Acciones{
 		return null;
 	}
 	
-	public static void clickEnRadioButton(WebElement radioButton) throws InterruptedException{
-		if (radioButton.isEnabled())
-			for (int i=0; i<3; i++){
-				click(radioButton);
-				Thread.sleep(1000);
-				if (radioButton.isSelected())
-					break;
-			}
-		else
-			fail("El elemento que se intenta seleccionar esta deshabilitado");
-	}
-	
 	public static String obtenerValorEtiqueta(WebElement etiqueta) throws InterruptedException{
 		return(obtenerValorEtiqueta(etiqueta, 1));
 	}
@@ -253,9 +242,6 @@ public class Acciones{
 		return (String)((JavascriptExecutor)driver).executeScript("return arguments[0].value;", campo);
 	}
 	
-	public static String informacionDeElemento(WebElement elemento) {
-		return elemento.getTagName();
-	}
 	
 	////////////-----------------Acciones Sikuli-----------------////////////
 	
@@ -352,7 +338,8 @@ public class Acciones{
 		seleccionarCombo(combo, opcion, 10);
 	}
 	
-	public static void sendKeys(String imagen, String texto, int tiempo) throws InterruptedException{
+	public static void sendKeys(String imagen, String texto, int tiempo) throws Exception{
+		Screen s = new Screen();
 		for (int i=0; i<=tiempo*10; i++){
 			try{
 				Thread.sleep(100);
@@ -370,8 +357,118 @@ public class Acciones{
 		}		
 	}
 	
-	public static void sendKeys(String imagen, String texto) throws InterruptedException{
+	public static void sendKeys(String imagen, String texto) throws Exception{
 		sendKeys(imagen, texto, 10);
+	}
+	
+	public static void move(String imagen, int tiempo) throws Exception{
+		Screen s = new Screen();
+		for (int i=0; i<=tiempo*10; i++){
+			try{
+				Thread.sleep(100);
+				s.mouseMove(imagen);
+				break;
+			}
+			catch(Exception e){
+				if(i==tiempo*10){
+					if (e instanceof NoSuchElementException)
+						fail("No se encontro el elemento para realizar el Click: ");
+					else 
+						throw e;
+				}
+			}
+		}
+	}
+	
+	public static void move(String imagen) throws Exception{
+		move(imagen, 10);
+	}
+	
+	public static void selectByIndex(String imagen, int indice, int tiempo) throws Exception{
+		Screen s = new Screen();
+		for (int i=0; i<=tiempo*10; i++){
+			try{
+				Thread.sleep(100);
+				s.click(imagen);
+				for (int j=1; j<=indice; j++){
+					Abajo();
+				}
+				Enter();
+				break;
+			}catch(Exception e){
+				if (tiempo*10==i){
+					if (e instanceof NoSuchElementException)
+						fail("No se encontro la opcion del combo con indice "+ indice);
+					else
+						throw e;
+				}
+			}
+		}		
+	}
+	
+	public static void selectByIndex(String imagen, int indice) throws Exception{
+		selectByIndex(imagen, indice, 10);
+	}
+	
+	public static void clickDerecho(String imagen) throws Exception{
+		Screen s = new Screen();
+		for (int i=0; i<=100; i++){
+			try{
+				Thread.sleep(100);
+				s.rightClick(imagen);
+				break;
+			}
+			catch(Exception e){
+				if(i==100){
+					if (e instanceof NoSuchElementException)
+						fail("No se encontro el elemento para realizar el Click: ");
+					else 
+						throw e;
+				}
+			}
+		}
+	}
+	
+	public static void clickDerecho(String imagen, int opcion) throws Exception{
+		Screen s = new Screen();
+		for (int i=0; i<=100; i++){
+			try{
+				Thread.sleep(100);
+				s.rightClick(imagen);
+				for (int j=1; j<=opcion; j++){
+					Abajo();
+				}
+				Enter();
+				break;
+			}
+			catch(Exception e){
+				if(i==100){
+					if (e instanceof NoSuchElementException)
+						fail("No se encontro el elemento para realizar el Click: ");
+					else 
+						throw e;
+				}
+			}
+		}
+	}
+	
+	public static void scroll(String imagen,int direccion, int cantidad) throws Exception{
+		Screen s = new Screen();
+		for (int i=0; i<=100; i++){
+			try{
+				Thread.sleep(100);
+				s.wheel(imagen, direccion, cantidad);
+				break;
+			}
+			catch(Exception e){
+				if(i==100){
+					if (e instanceof NoSuchElementException)
+						fail("No se encontro el elemento para realizar el Click: ");
+					else 
+						throw e;
+				}
+			}
+		}
 	}
 	
 }
