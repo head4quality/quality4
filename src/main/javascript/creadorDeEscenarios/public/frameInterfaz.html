@@ -1,0 +1,74 @@
+<html>
+<head>
+	<script src="libs/jquery-1.11.3.min.js"></script>
+	<script src="libs/snap.svg-min.js"></script>
+	<script src="js/app.js"></script>
+	<link rel=stylesheet href="css/estilo.css" type="text/css">
+	<link href="css/estiloMenuInteractivo.css" rel="stylesheet" type="text/css" media="all" />
+</head>
+<body>
+	<div id="toolBar">
+		<ul class="interactivo">
+			<li onclick="capturandoElemento=true">Agregar Elemento</li>
+		</ul>
+	</div>
+	<div id="imagenes"></div>
+	<div id="menuNuevoWebElement">
+		<strong>Nombre</strong><br/>
+		<input type="text" id="nombre"/>
+		<button id="aceptarNuevoWebElement">Aceptar</button>
+		<button>Cancelar</button>
+	</div>
+	<div id="nav" name="menuNuevoPaso">
+		<ul class="interactivo" id="navUl">
+			<li class="navLi">Accion
+				<ul id="acciones" class="interactivo">
+				</ul>
+			</li>
+			<li class="navLi">Asercion
+				<ul id="aserciones" class="interactivo">
+				</ul>
+			</li>
+			<li class="navLi accionesWebElement">Opciones
+				<ul class="interactivo">
+					<li>Cambiar nombre</li>
+					<li>Editar forma</li>
+				</ul>
+			</li>
+	</ul>
+	</div>
+	<script src="js/navigation.js" type="text/javascript"></script>
+	<script src="js/Reglas.js"></script>
+	<script src="js/GeneradorDeCodigo.js"></script>
+	<script>
+		cargarImagenes('nombre');
+		cargarInteraccion();
+		cargarToolBar();
+		gc = new GeneradorDeCodigo();
+	</script>
+		<div id="formularioGenerarCodigo">
+		<select name="webElementsSelect">
+			<option>adasdf</option>
+		</select>
+		<input type="text" name="textoParametro"></input>
+		<button name="okCrearPaso">Ok</button>
+	</div>
+	<div id="codigoGenerado">
+		<div>
+			<h2>Page Object</h2>
+			<div id="codigoPage" style="display: block;"></div>
+			<div id="constructorPage">
+				public NombrePage(){
+					<div></div>
+				}
+			</div>
+		</div>
+		<div id="codigoSteps">
+			<h2>Steps</h2>
+		</div>
+		<div id="codigoFeatures">
+			<h2>Features</h2>
+		</div>
+	</div>
+</body>
+</html>
