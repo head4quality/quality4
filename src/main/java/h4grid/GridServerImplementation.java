@@ -2,6 +2,7 @@ package h4grid;
 
 import static org.junit.Assert.fail;
 
+import javax.jws.WebMethod;
 import javax.jws.WebService;
 
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -15,7 +16,48 @@ public class GridServerImplementation implements GridServer{
 
 	private FirefoxDriver driver;
 	
-	TablaDeElementos page;
+
+	private boolean es_imagen(String elemento){
+		if (elemento.contains("/"))
+			return true;
+		return false;
+	}
+	
+	private void verifyDriver(){
+		if (driver==null)
+			fail("You must open the WebDriver first");
+	}
+
+	@Override
+	public void abrirDriver(String url) {
+		System.out.println("Abriendo Driver");
+		this.driver = new FirefoxDriver();
+		this.driver.manage().window().maximize();
+		driver.get(url);
+	}
+	
+	@Override
+	public void click(String elemento) throws Exception {
+		if(es_imagen(elemento))
+			AccionesSikuli.click(elemento);
+		else
+			AccionesSelenium.click(elemento, driver);
+	}
+
+	@Override
+	public void clear(String elemento) throws Exception {
+		verifyDriver();
+		AccionesSelenium.clear(elemento, driver);
+	}
+
+	@Override
+	public void sendKeys(String element, String text) throws Exception {
+		verifyDriver();
+		if(es_imagen(element))
+			AccionesSikuli.sendKeys(element, text);
+		else
+			AccionesSelenium.sendKeys(element, text, driver);	
+	}
 
 	@Override
 	public void abrirDriver() {
@@ -23,17 +65,5 @@ public class GridServerImplementation implements GridServer{
 		this.driver = new FirefoxDriver();
 		this.driver.manage().window().maximize();
 	}
-
-	@Override
-	public void click(String elemento) throws Exception {
-		if(page.obtenerSelector(elemento).equals("null"))
-			fail("El elemento ingresado no esta definido en el archivo Properties. ");
-		if(page.es_imagen(page.obtenerSelector(elemento)))
-			AccionesSikuli.click(page.obtenerSelector(elemento));
-		else
-			AccionesSelenium.click(page.obtenerSelector(elemento), driver);
-	}
-	
-	
 
 }

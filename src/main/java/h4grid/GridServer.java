@@ -14,4 +14,10 @@ public interface GridServer {
 	@WebMethod void abrirDriver();
 	
 	@WebMethod void click(String elemento) throws Exception;
+
+	@WebMethod void clear(String obtenerSelector) throws Exception;
+
+	@WebMethod void sendKeys(String obtenerSelector, String texto) throws Exception;
+
+	@WebMethod void abrirDriver(String url);
 }
