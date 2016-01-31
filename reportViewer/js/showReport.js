@@ -219,35 +219,47 @@ var report = [
   }
 ]
 
-var parseReport = function(){
-	featuresTable = $('<table/>');
+var parseReportUsingTableMaker = function() {
+	var featuresTableMaker = new TableMaker('featuresTable');
+	var scenariosTableMaker = new TableMaker('scenariosTable');
 	for(var i=0; i<report.length; i++){
 		var totalFeaturesTime = 0;
-		var featureRow = $('<tr/>');
 		var casesFailed = 0;
 		var scenarios = report[i].elements;
-		var columnName = $('<td/>').html(report[i].name);
-		featureRow.append(columnName);
-		var columnTotalScenarios = $('<td/>').html(scenarios.length);
-		featureRow.append(columnTotalScenarios);		
+		var columnName = report[i].name;
 		for (var j=0; j<scenarios.length; j++){
+			var totalScenarioTime=0;
 			var steps = scenarios[j].steps;
+			var scenarioStatus = 'passed';
 			for (var k=0; k<steps.length; k++){
 				if (steps[k].result.duration != undefined){
-					totalFeaturesTime+=(steps[k].result.duration/1000);
+					totalScenarioTime+=(steps[k].result.duration/1000);
+					totalFeaturesTime+=totalScenarioTime;
 				}
 				if (steps[k].result.status=='failed'){
-					casesFailed++;	
+					casesFailed++;
+					scenarioStatus = 'failed';
 				}
 			}
+			scenariosTableMaker.newTableRow([
+					scenarios[j].name,
+					steps.length,
+					scenarioStatus,
+					totalScenarioTime
+					,"lalala"]);
 		}
-		var totalTimeColumn = $('<td/>').html(totalFeaturesTime);
-		featureRow.append(totalTimeColumn);
-		featuresTable.append(featureRow);
+		featuresTableMaker.newTableRow([report[i].name, scenarios.length, totalFeaturesTime]);
 	}
-	$('body').append(featuresTable);
+	featuresTableMaker.draw();
+	scenariosTableMaker.draw();
+};
+
+function setStyles () {
+	$featuresTable=$('#featuresTable');
+	$featuresTable.find('td:nth-child(2)').addClass('centred');
 }
 
 document.ready = function() {
-	parseReport();
+	parseReportUsingTableMaker();
+	setStyles();
 }
