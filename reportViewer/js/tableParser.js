@@ -8,10 +8,16 @@
  * 	debe estar creada a nivel html
  */
 function TableMaker (tableId) {
-	this.$table = $('#'+tableId);
+	if (typeof tableId == "string") {
+		this.$table = $('#'+tableId);
+	}
+	else{
+		this.$table = tableId;
+	};
 	//TODO verificar si existe la tabla
 	this.rows = [];
 }
+
 
 /**
  * Guarda una nueva fila de tabla html en esta instancia de TableMaker. Estas
@@ -29,6 +35,7 @@ function(elementsArray) {
 		newRow.append(cell);
 	};
 	this.rows.push(newRow);
+	return newRow;
 };
 
 /**

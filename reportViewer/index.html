@@ -7,20 +7,26 @@
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
-	<table id="featuresTable" width="800px">
-		<tr>
-			<th>Nombre</th>
-			<th>Cantidad</th>
-			<th>Tiempo</th>
-		</tr>
-	</table>
-	<table id="scenariosTable" width="800px">
-		<tr>
-			<th>Nombre</th>
-			<th>Pasos</th>
-			<th>Status</th>
-			<th>Tiempo</th>
-		</tr>
-	</table>
+	<div id="featuresPart">
+		<table id="featuresTable" width="100%">
+			<tr>
+				<th>Nombre</th>
+				<th>Cantidad</th>
+				<th>Tiempo</th>
+			</tr>
+		</table>
+		<table id="scenariosTable" width="100%">
+			<col width="40%"/>
+			<col span="3" width="20%" style="text-align:center"/>
+			<tr>
+				<th>Nombre</th>
+				<th>Pasos</th>
+				<th>Status</th>
+				<th>Tiempo</th>
+			</tr>
+		</table>
+	</div>
+	<div id="scenariosPart">
+	</div>
 </body>
 </html>
