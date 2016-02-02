@@ -1,12 +1,22 @@
 package common.H4Q;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
 import org.openqa.selenium.By;
 //import org.openqa.selenium.OutputType;
 //import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.sikuli.script.Screen;
 
 import static org.junit.Assert.*;
+import cucumber.api.Scenario;
+import cucumber.api.java.After;
+import cucumber.api.java.Before;
 //import cucumber.api.Scenario;
 //import cucumber.api.java.After;
 //import cucumber.api.java.Before;
@@ -18,15 +28,34 @@ public class Pasos {
 	private WebDriver driver;
 	TablaDeElementos page;
 	
-	/*@Before
+	@Before
 	public void setUpBefore() throws Exception{
 		
 	}
 	
 	@After
-	public void tearDownAfter(){
+	public void tearDownAfter(Scenario scenario) throws IOException{
+		if (scenario.isFailed()){
+			BufferedImage originalImage = new Screen().capture().getImage();
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			ImageIO.write( originalImage, "jpg", baos );
+			baos.flush();
+			byte[] imageInByte = baos.toByteArray();
+			baos.close();
+			scenario.embed(imageInByte, "image/png");
+		}	
+	}
 	
-	}*/
+	@When("^paso que falla$")
+	public void paso_que_falla() throws Throwable {
+		fail("errorrrr");
+	}
+
+	@When("^paso que no se ejecuta$")
+	public void paso_que_no_se_ejecuta() throws Throwable {
+	}
+
+
 	
 	@Given("^cargar elementos con propertie \"(.*?)\"$")
 	public void cargar_elementos_con_propertie(String propertie) throws Throwable {
@@ -35,8 +64,8 @@ public class Pasos {
 	
 	@Given("^abrir driver$")
 	public void abrir_driver(){
-		this.driver = new FirefoxDriver();
-		this.driver.manage().window().maximize();
+		//this.driver = new FirefoxDriver();
+		//this.driver.manage().window().maximize();
 	}
 	
 	@When("^click en \"(.*?)\"$")

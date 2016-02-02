@@ -1,0 +1,28 @@
+.navLi{
+	float:left;
+}
+
+.navLi ul{
+	display: none;
+	position: absolute;
+}
+
+.navLi ul li{
+	white-space: nowrap;	
+}
+
+#navUl {
+}
+
+#nav {
+	display : none;
+	position: absolute;
+	top:0;
+	left:0;
+	z-index:100;
+}
+
+#main {
+	width: 50%;
+	margin: 0 auto;
+}

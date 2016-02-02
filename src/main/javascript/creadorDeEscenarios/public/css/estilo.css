@@ -1,0 +1,72 @@
+body{
+	font-family:sans-serif;
+}
+
+#codigoGenerado{
+	display:table-row;
+}
+
+#codigoGenerado div{
+	display:table-cell;
+}
+
+.pantalla {
+	display: block;
+}
+
+#imagenes {
+	white-space: nowrap;	
+}
+
+#imagenes div{
+	display:table-cell;
+	white-space:normal;
+}
+#menuNuevoWebElement{
+	display:none;
+	position:absolute;
+	top:0;
+	left:0;
+	z-index:100;
+	padding:10;
+	background-color:orangered;
+}
+
+#toolBar ul li{
+	list-style: none;
+	color: white;
+	display: inline;
+	cursor:default;
+}
+
+#toolBar ul li:active{
+	background-color:darkGray;
+}
+
+rect:active{
+	background-color:grey;
+	
+}
+
+
+
+.interactivo{
+	list-style: none;
+	padding:0px;
+	cursor:default;
+}
+
+.interactivo li{
+	margin:1px;
+	color: white;
+	background-color: orangered;
+	padding:10px;
+}
+
+.interactivo li:hover{
+	background-color: grey;
+}
+
+.interactivo li:active{
+	background-color: orangered;
+}
