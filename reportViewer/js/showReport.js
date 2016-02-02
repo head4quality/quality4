@@ -415,12 +415,15 @@ var parseReportUsingTableMaker = function() {
 					scenarioStatus = 'failed';
 				}
 			}
+			var name = report[i].name+"-"+scenarios[j].name;
+			var pdf = new newpdf(name ,scenarios[j] ,scenarioStatus, totalScenarioTime);
 			createScenarioDiv(scenarios[j].id, scenarios[j]);
 			scenariosTableMaker.newTableRow([
 					scenarios[j].name,
 					steps.length,
 					scenarioStatus,
-					totalScenarioTime
+					totalScenarioTime,
+					pdf
 					])
 				.addClass('hidden')
 				.attr('name', scenarios[j].id);
