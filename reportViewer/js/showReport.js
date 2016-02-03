@@ -394,7 +394,7 @@ function createScenarioDiv (name, element) {
 		tableMaker.newTableRow(['After', element.after[0].result.status, element.after[0].result.duration])
 	};
 	if (scenarioDataImage!='') {
-		newDiv.append($('<img/>').attr('src','data:image/jpeg;base64,'+scenarioDataImage).attr('width', '100%'));
+		newDiv.append($('<img/>').attr('src','data:image/jpeg;base64,'+scenarioDataImage).attr({'width':'90%'}));
 	};
 	tableMaker.draw();
 }
