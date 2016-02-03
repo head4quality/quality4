@@ -363,6 +363,12 @@ var report = [
   }
 ]
 
+function markAsSelected (tr) {
+	if (tr.hasClass('selected')) {return};
+	tr.siblings('.selected').toggleClass('selected');
+	tr.toggleClass('selected');
+}
+
 function createScenarioDiv (name, element) {
 	var newTable = $('<table>')
 		.attr('id', name);
@@ -374,9 +380,11 @@ function createScenarioDiv (name, element) {
 		tableMaker.newTableRow(['Before', element.before[0].result.status, element.before[0].result.duration])
 	};
 	for (var i = 0; i < element.steps.length; i++) {
+		var result=element.steps[i].result.status;
 		tableMaker.newTableRow([element.steps[i].keyword+' '+element.steps[i].name,
-				element.steps[i].result.status,
-				element.steps[i].result.duration]);
+				result,
+				element.steps[i].result.duration])
+			.addClass(result);
 		if (element.steps[i].embeddings != undefined) {
 			scenarioDataImage=element.steps[i].embeddings[0].data;
 		};
@@ -386,7 +394,7 @@ function createScenarioDiv (name, element) {
 		tableMaker.newTableRow(['After', element.after[0].result.status, element.after[0].result.duration])
 	};
 	if (scenarioDataImage!='') {
-		newDiv.append($('<img/>').attr('src','data:image/png;base64,'+scenarioDataImage));
+		newDiv.append($('<img/>').attr('src','data:image/jpeg;base64,'+scenarioDataImage).attr('width', '100%'));
 	};
 	tableMaker.draw();
 }
@@ -444,12 +452,14 @@ function setInteraction () {
 	// Interaccion de la tabla de features
 	$('#featuresTable tr').on('click', function() {
 		var nombre = $(this).attr('name');
+		markAsSelected($(this));
 		$('#scenariosTable tr.visible').toggleClass('visible').toggleClass('hidden');
 		$('#scenariosTable tr[name*="'+nombre+';"]').toggleClass('visible').toggleClass('hidden');
 	});
 	//Interaccion de la tabla de escenarios
 	$('#scenariosTable tr').on('click', function() {
 		var nombre = $(this).attr('name');
+		markAsSelected($(this));
 		$('#scenariosPart div.visible').toggleClass('visible').toggleClass('hidden');
 		$('#scenariosPart div[name="'+nombre+'"]').toggleClass('visible').toggleClass('hidden');
 	});
