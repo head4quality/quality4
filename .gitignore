@@ -1,6 +1,8 @@
-/pom.xml
 target/
 .settings/
 src/main/javascript/creadorDeEscenarios/node_modules/
 src/main/javascript/node_modules/
 src/main/javascript/creadorDeEscenarios/db
+*.swp
+*.project
+README.md
