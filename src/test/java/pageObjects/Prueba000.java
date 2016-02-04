@@ -12,7 +12,7 @@ public class Prueba000 extends PageObjectSeleniumSikuli{
 	@FindBy(id="search-term") public WebElement buscadorJuegos;
 	
 	@FindBy(id="Email") public WebElement ingresarMail;
-	@FindBy(id="Passwd") public WebElement ingresarContraseña;
+	@FindBy(id="Passwd") public WebElement ingresarContrasenia;
 	@FindBy(id="next") public WebElement botonNext;
 	@FindBy(id="signIn") public WebElement botonIngresar;
 	@FindBy(css=".T-I-KE") public WebElement botonRedactar;
@@ -45,7 +45,7 @@ public class Prueba000 extends PageObjectSeleniumSikuli{
 		mapaDeElementosSikuli.put("popoutMensajeEnviado","/home/andres/Escritorio/imagenes/popoutMensajeEnviado.png");
 		 
 		mapaDeElementosSelenium.put("ingresarMail", ingresarMail);
-		mapaDeElementosSelenium.put("ingresarContraseÃ±a",ingresarContraseña );
+		mapaDeElementosSelenium.put("ingresarContraseÃ±a",ingresarContrasenia );
 		mapaDeElementosSelenium.put("botonIngresar", botonIngresar);
 		mapaDeElementosSelenium.put("botonRedactar", botonRedactar);
 		mapaDeElementosSikuli.put("campoPara", "/home/andres/Escritorio/imagenes/campoPara.png");
