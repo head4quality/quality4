@@ -5,4 +5,5 @@ src/main/javascript/node_modules/
 src/main/javascript/creadorDeEscenarios/db
 *.swp
 *.project
+*.classpath
 README.md
