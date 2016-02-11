@@ -59,7 +59,7 @@ rect:active{
 .interactivo li{
 	margin:1px;
 	color: white;
-	background-color: orangered;
+	background-color: red;
 	padding:10px;
 }
 
@@ -68,5 +68,32 @@ rect:active{
 }
 
 .interactivo li:active{
-	background-color: orangered;
+	background-color: red;
+}
+
+/* Resaltado de sintaxis*/
+
+.keyword {
+    color:red;
+}
+
+.element{
+    color:blue;
+    cursor:default;
+}
+
+.parameter{
+    color:green;
+}
+
+/* Formulario de generacion de codigo */
+
+#formularioGenerarCodigo{
+    position:absolute;
+    display:none;
+    top:30%;
+    left:30%;
+    padding: 10px;
+    background-color: red;
+    color:white;
 }

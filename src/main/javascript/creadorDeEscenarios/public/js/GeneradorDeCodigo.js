@@ -12,10 +12,18 @@ function GeneradorDeCodigo(){
 			);
     	};
 		$( '.'+keys[i] ).on('click', function(){
-				pasoActual=$(this);
-				$('#codigoFeatures').append(
-					$('<p/>').html(generarPasoGherkins(pasoActual.attr('class')))
-				);
+			pasoActual=$(this);
+            r=reglas[pasoActual.attr('class')];
+            // oculto el menu de nuevo paso y borro el div que bloquea la aplicacion
+            $('#nav').css({'display':'none'});
+            $('#block').remove();
+            if (r.ingresarDatos!=null)
+                r.ingresarDatos();
+            else{
+			    $('#codigoFeatures').append(
+				    $('<p/>').html( generarPasoGherkins( pasoActual.attr('class') ) )
+			    );
+            }
 		});
 	}
 	

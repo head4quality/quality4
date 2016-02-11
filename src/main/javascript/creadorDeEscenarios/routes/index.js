@@ -21,6 +21,13 @@ router.get('/feature/:nombreFeature', function(req, res, next) {
 		});
 });
 
+router.post('/feature/crear/:nombreFeature', function(req, res, next){
+    nuevoFeature = new Feature(req.body);
+    //nuevoFeature.feature=req.feature;
+    nuevoFeature.save(function(err){});
+    res.send("guardado ok!");
+});
+
 router.post('/feature/guardar/:nombreFeature', function(req, res, next){
     Feature.find({feature:req.params.nombreFeature}, function(err, fs){
 			currentFeature = fs[0];

@@ -12,20 +12,20 @@ reglas["asercionElementoEstado"]={
 	accion: "se verifica",
 	elemento:function(){
 		//obtener nombre del webelement seleccionado
-		return elementoActual.attr('name');
+		return '<strong class="element">'+elementoActual.attr('name')+'</strong>';
 	},
 	estado:function(){
 		//obtener html del li clickeado
 		return pasoActual.html();
 	},
 	regla:function(){
-		return this.keyword+" "+this.accion+' "'+this.elemento()+'" '+' "'+this.estado()+'" '
+		return'<strong class="keyword">'+this.keyword+"</strong> "+this.accion+' "'+this.elemento()+'" '+' "'+this.estado()+'" '
 	}
 }
 
 reglas["accionElemento"]={
 	menu:$acciones,
-	entradas:['click'],
+	entradas:['click en'],
 	keyword:"When",
 	accion:function(){
 		//obtener html del li clickeado
@@ -33,10 +33,10 @@ reglas["accionElemento"]={
 	},
 	elemento:function(){
 		//obtener nombre del webelement seleccionado
-		return elementoActual.attr('name');
+		return '<strong class="element">'+elementoActual.attr('name')+'</strong>';
 	},
 	regla:function(){
-		return this.keyword+" "+this.accion()+' "'+this.elemento()+'" ';
+		return '<strong class="keyword">'+this.keyword+"</strong> "+this.accion()+' "'+this.elemento()+'" ';
 	}
 }
 
@@ -51,12 +51,39 @@ reglas["accionParametroElemento"]={
 	},
 	elemento:function(){
 		//obtener nombre del webelement seleccionado
-		return elementoActual.attr('name');
+		return '<strong class="element">'+elementoActual.attr('name')+'</strong>';
 	},
 	parametro:function(){
 		//obtener el texto ingresado en el input
+		return '<strong class="parameter">'+document.getElementsByName('textoParametro')[0].value+'</strong>';
 	},
 	regla:function(){
-		return this.keyword+" "+this.accion()+' "'+this.parametro()+'" en '+' "'+this.elemento()+'" ';
-	}
+                    console.log("dsfadafd");
+		return '<strong class="keyword">'
+            +reglas["accionParametroElemento"].keyword
+            +"</strong> "+reglas["accionParametroElemento"].accion()+' "'
+            +reglas["accionParametroElemento"].parametro()
+            +'" en '+' "'+reglas["accionParametroElemento"].elemento()+'" ';
+	},
+    ingresarDatos:function(){
+        bloquearPantalla();
+	    $('#block').click(function(){
+		    $(this).remove();
+            $('#formularioGenerarCodigo').css({'display':'none'});
+	    });
+        $( '#formularioGenerarCodigo' ).css({'display':'block', 'z-index':'100'});
+        $( 'button[name=okCrearPaso]' ).unbind();
+        var auxiliar=this.regla;
+        /*
+         * Accion al apretar el boton ok del formulario de nuevo paso
+         */
+        $( 'button[name=okCrearPaso]' ).on('click', function(){
+            $('#codigoFeatures').append(
+					    $('<p/>').html( auxiliar() )
+				    );
+            $( '#formularioGenerarCodigo' ).css('display', 'none');
+            //Desbloquear pantalla
+            $( '#block' ).remove();
+        });
+    }
 }

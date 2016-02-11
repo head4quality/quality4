@@ -48,19 +48,25 @@ var dibujarImagenes = function(){
 		 */
 		for (var i = 0; i < imagenes[index].elementos.length; i++) {
 			var elemento=imagenes[index].elementos[i];
-			s.rect(elemento.x, elemento.y, elemento.height, elemento.width)
+			elementosDefinidos[elemento.nombre]=s.rect(elemento.x, elemento.y, elemento.height, elemento.width)
 				.attr({
 					name: elemento.nombre,
 					fill: "rgba(255,255,255,0.4)",
 	    			stroke: "#000",
 	    			strokeWidth: 1 
 				});
+            generarCodigoPageObject(elemento.nombre);
 		};
 	});
 	$('#imagenes').css('height', altoImagenes);
 }
 
+/*
+ * 1. Elimina las imgenes dibujadas
+ * 2. Pide las imagenes del feature indicado y las dibuja
+ */
 var cargarImagenes = function(nombreFeature){
+    $( '#imagenes div' ).remove();
 	$.get("/feature/"+nombreFeature, function(res){
 		imagenes=res.imagenes;
 	}).done(function(){
@@ -71,6 +77,24 @@ var cargarImagenes = function(nombreFeature){
 }
 
 var rectanguloDibujado; //Ultimo webelement dibujado
+
+/**
+ * Funcion que genera el codigo del archivo PageObject.java
+ */
+var generarCodigoPageObject= function(nombreWebElement){
+		$('#codigoPage').append(
+			$('<p/>').html('@FindBy() public WebElement '+nombreWebElement.replace(/\s+/g,"_")+"_selenium;")
+		);
+        $('#codigoPage').append(
+			$('<p/>').html('public String '+nombreWebElement.replace(/\s+/g,"_")+"_sikuli;")
+		);
+		$('#constructorPage > div').append(
+			$('<p/>').html('mapaDeElementosSelenium.put("' +nombreWebElement+ '", '+nombreWebElement.replace(/\s+/g,"_")+"_selenium"+');')
+		);
+        $('#constructorPage > div').append(
+			$('<p/>').html('mapaDeElementosSikuli.put("' +nombreWebElement+ '", '+nombreWebElement.replace(/\s+/g,"_")+"_sikuli"+');')
+		);
+}
 
 var cargarInteraccion = function(){
 	console.log('carga de interacciones');
@@ -167,24 +191,21 @@ var cargarInteraccion = function(){
 		$('#block').remove();
 	});
 
-	var generarCodigoPageObject= function(nombreWebElement){
-		$('#codigoPage').append(
-			$('<p/>').html('@FindBy() public WebElement '+nombreWebElement.replace(/\s+/g,"_"))
-		);
-		$('#constructorPage > div').append(
-			$('<p/>').html('mapaDeElementos.put("' +nombreWebElement+ '", '+nombreWebElement.replace(/\s+/g,"_")+');')
-		);
-	}
-
-
 	/*
-	 * Acciones de las aserciones, cuando se hace click en un item de la lista de aserciones
+	 * Accion al pasar por la definicion de un webelement en un step
 	 */
-	$('.asercion ul').on('click', 'li', function(){
-		$('#codigoFeatures').append(
-			$('<p/>').html('Then verificar que "'+elementoActual.attr('name') + '" "' + $(this).html()+'"')
-		);
-	});
+    $( '#codigoFeatures' ).on('mouseenter', 'strong.element', function(){
+        elementosDefinidos[$(this).html()].attr({
+            stroke:"#00F",
+            strokeWidth:4
+        });
+    }).on('mouseleave', 'strong.element', function(){
+        elementosDefinidos[$(this).html()].attr({
+            stroke:"#000",
+            strokeWidth:1
+        });
+    });;
+    
 }
 
 var cargarToolBar = function(){
@@ -225,4 +246,13 @@ var bloquearPantalla = function(){
 		'height':window.screen.height
 	});
 	$('body').append(divBloqueo);
+}
+
+/*
+ * Peticion post que guarda el feature en la base de datos
+ */
+var nuevoFeature = function(){
+    nombre=document.getElementById('nombreFeature').value;
+    req = {feature:nombre};
+    $.post("/feature/crear/"+nombre, req);
 }
