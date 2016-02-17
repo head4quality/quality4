@@ -1,0 +1,125 @@
+body{
+	font-family:sans-serif;
+	background-color:black;
+}
+
+.centred {
+	text-align: center; 
+}
+
+.hidden {
+	display:none;
+}
+
+.visible td{
+	overflow:hidden;
+}
+
+table{
+	border-collapse: collapse;
+	margin-bottom: 10px;
+}
+
+#featuresTable td:not(:first-child){
+	text-align:center;
+}
+
+td{
+	cursor:pointer;
+	color:white;
+	padding-left:10px;
+	padding-top:5px;
+}
+
+h3{
+	background-color: black;
+	margin: 0px;
+	padding: 20px;
+	text-decoration: underline;
+}
+
+td:first-child, th:first-child{
+}
+
+td:last-child, th:last-child{
+}
+
+
+#scenariosPart{
+	top:30%;
+    	height: 59%;
+    	padding: 0px;
+	overflow-y: scroll;
+	border-top:5px solid coral;
+}
+
+#featuresPart{
+    	height: 39%;
+	overflow-y: scroll;
+}
+
+#scenariosTable td:not(:first-child){
+	text-align:center;
+}
+
+tr:hover{
+	background-color:LightSteelBlue;
+}
+
+th{
+	background-color:coral;
+	color:black;
+	padding-top:5px;
+	padding-bottom:3px;
+}
+
+#scenariosPart table{
+	width:100%;
+}
+
+.selected{
+	background-color:LightSlateGray;
+	color:white;
+}
+
+#featuresPart, #scenariosPart{
+	margin-left:1%;
+	margin-right:1%;
+	margin-bottom:3px;
+	background-color:grey;
+	color:white;
+}
+
+.failed{
+	color:red;
+}
+
+.passed{
+	color:green;
+}
+
+.skipped{
+	color:blue;
+}
+
+input[type=button] {
+	background-color:grey;
+  	color: coral;
+  	border: 1px solid coral;
+  	font-weight: bold;
+	margin-bottom:3px;
+}
+	
+::-webkit-scrollbar {
+    width: 12px;
+}
+::-webkit-scrollbar-track {
+    background-color: #eaeaea;
+    border-left: 1px solid #ccc;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+}
+::-webkit-scrollbar-thumb:hover {
+    background-color: #aaa;
+}

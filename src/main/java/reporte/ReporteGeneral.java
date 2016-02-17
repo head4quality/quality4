@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
 
 
@@ -51,19 +52,21 @@ public class ReporteGeneral implements Runnable{
 	
 	private void sendPost() throws Exception {
 
-		String url = "http://192.168.0.7:3000/report/saveReport/"+client;
+		String url = "http://127.0.0.1:3000/report/saveReport/"+client;
 		URL obj = new URL(url);
-		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+		HttpURLConnection con;
 
+		String body=new String(readFile(),Charset.defaultCharset());
+		body="{\"report\":"+body+"}";
+
+		con = (HttpURLConnection) obj.openConnection();
+		
 		//add reuqest header
 		con.setRequestMethod("POST");
-		con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
-
+		 con.setRequestProperty("Content-Type", "application/json");
 		// Send post request
 		con.setDoOutput(true);
 		DataOutputStream wr = new DataOutputStream(con.getOutputStream());
-		String body=new String(readFile());
-		body="{report:"+body+"}";
 		con.getOutputStream().write(body.getBytes());
 		wr.flush();
 		wr.close();
