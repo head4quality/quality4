@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://127.0.0.1:3001/test');
+mongoose.connect('mongodb://root:root@jello.modulusmongo.net:27017/duqyD4oz');
 
 var featureScema= mongoose.Schema({
 	feature:String,

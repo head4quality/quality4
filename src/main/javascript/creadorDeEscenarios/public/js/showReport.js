@@ -10,7 +10,8 @@ function markAsSelected (tr) {
 
 function createScenarioDiv (name, element) {
 	var newTable = $('<table>')
-		.attr('id', name);
+		.attr('id', name)
+		.append('<tr><th>Pasos</th><th>Status</th><th>Tiempo</th></tr>');
 	var newDiv = $('<div/>').addClass('hidden').attr('name', name).append(newTable);
 	$('#scenariosPart').append(newDiv);
 	var tableMaker = new TableMaker(newTable);
@@ -20,7 +21,7 @@ function createScenarioDiv (name, element) {
 	};
 	for (var i = 0; i < element.steps.length; i++) {
 		var result=element.steps[i].result.status;
-		tableMaker.newTableRow([element.steps[i].keyword+' '+element.steps[i].name,
+		tableMaker.newTableRow([element.steps[i].keyword+' - '+element.steps[i].name,
 				result,
 				element.steps[i].result.duration])
 			.addClass(result);
@@ -99,13 +100,18 @@ function setInteraction () {
 	$('#scenariosTable tr').on('click', function() {
 		var nombre = $(this).attr('name');
 		markAsSelected($(this));
+		$('#scenariosPart').toggleClass('hidden');
 		$('#scenariosPart div.visible').toggleClass('visible').toggleClass('hidden');
 		$('#scenariosPart div[name="'+nombre+'"]').toggleClass('visible').toggleClass('hidden');
+	});
+
+	$('#scenariosPart').on('click', function() {
+		$('#scenariosPart').toggleClass('hidden');
 	});
 }
 
 document.ready = function() {
-	$.get( "http://127.0.0.1:3000/report/lastReport/clienteDePruebaNum2", function( data ) {
+	$.get('report/lastReport/clienteDePrueba', function( data ) {
 		report=data[0].report;
 	}).done(function(){
 		parseReportUsingTableMaker();
