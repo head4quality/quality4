@@ -1,5 +1,6 @@
 var report = "";
 
+var statusSvg= '<svg width="5.5666mm" height="5.8mm" id="svg2"> <g id="layer1"> <circle cx="11" cy="10" r="9" style="stroke: #FFF;stroke-width: 6%;"/> </g></svg>'
 
 
 function markAsSelected (tr) {
@@ -12,17 +13,27 @@ function createScenarioDiv (name, element) {
 	var newTable = $('<table>')
 		.attr('id', name)
 		.append('<tr><th>Pasos</th><th>Status</th><th>Tiempo</th></tr>');
-	var newDiv = $('<div/>').addClass('hidden').attr('name', name).append(newTable);
+	var newDiv = $('<div/>').addClass('hidden').attr('name', name)
+		.append($('<h3/>').html(name))
+		.append(newTable);
+	var errorMessage = '';
 	$('#scenariosPart').append(newDiv);
 	var tableMaker = new TableMaker(newTable);
 	if (element.before != undefined) {
 		// Se crea la fila nombre, status, tiempo
-		tableMaker.newTableRow(['Before', element.before[0].result.status, element.before[0].result.duration])
+		tableMaker.newTableRow(['<strong style="color:rgb(232,230,229)">Before</strong>'
+			, statusSvg
+			, element.before[0].result.duration])
+			.addClass(element.before[0].result.status);
 	};
 	for (var i = 0; i < element.steps.length; i++) {
 		var result=element.steps[i].result.status;
-		tableMaker.newTableRow([element.steps[i].keyword+' - '+element.steps[i].name,
-				result,
+		if(element.steps[i].result.error_message!=undefined) 
+			errorMessage=element.steps[i].result.error_message
+				.replace(/\n/g, '<br/>')
+				.replace(/\t/g, '&nbsp;&nbsp;&nbsp;&nbsp;');
+		tableMaker.newTableRow(['<strong style="color:rgb(232,230,229)">'+element.steps[i].keyword+'</strong>'+element.steps[i].name,
+				statusSvg,
 				element.steps[i].result.duration])
 			.addClass(result);
 		if (element.steps[i].embeddings != undefined) {
@@ -31,8 +42,12 @@ function createScenarioDiv (name, element) {
 	};
 	if (element.after != undefined) {
 		// Se crea la fila nombre, status, tiempo
-		tableMaker.newTableRow(['After', element.after[0].result.status, element.after[0].result.duration])
+		tableMaker.newTableRow(['<strong style="color:rgb(232,230,229)">After</strong>'
+			, statusSvg
+			, element.after[0].result.duration])
+			.addClass(element.after[0].result.status);
 	};
+	newDiv.append($('<p/>').addClass('blue').html('head@quality:#<br/>Error<br/>'+errorMessage));
 	if (scenarioDataImage!='') {
 		newDiv.append($('<img/>').attr('src','data:image/jpeg;base64,'+scenarioDataImage).attr({'width':'90%'}));
 	};
@@ -48,6 +63,7 @@ var parseReportUsingTableMaker = function() {
 		var casesFailed = 0;
 		var scenarios = report[i].elements;
 		var columnName = report[i].name;
+		var totalScenarios=0;
 		for (var j=0; j<scenarios.length; j++){
 			var totalScenarioTime=0;
 			var steps = scenarios[j].steps;
@@ -75,8 +91,9 @@ var parseReportUsingTableMaker = function() {
 					])
 				.addClass('hidden')
 				.attr('name', scenarios[j].id);
+			totalScenarios++;
 		}
-		featuresTableMaker.newTableRow([report[i].name, scenarios.length, totalFeaturesTime])
+		featuresTableMaker.newTableRow([report[i].name, totalScenarios, totalFeaturesTime])
 			.attr('name', report[i].id);
 	}
 	featuresTableMaker.draw();
@@ -110,12 +127,39 @@ function setInteraction () {
 	});
 }
 
+var underline = function(){
+	$('div.underline')
+		.each(function(i, obj){
+			//var svg = $('<svg><svg/>').attr('id','underline'+i);
+			//$(obj).append(svg);
+			var snap = Snap('#underline'+i);
+			var title=$(obj).find('h3');
+			var underline = snap.line (0,10,0,10);
+			underline.attr({
+				stroke: "rgb(130, 130, 130)",
+				strokeWidth: 2
+			});
+			underline.animate({x2:title.innerWidth()}, 1500)
+			var circle = snap.circle(title.innerWidth(),10, 0);
+			circle.attr({
+				fill: "rgb(130, 130, 130)"
+			});
+			circle.animate({r:5}, 1000);
+		});
+}
+
 document.ready = function() {
+	$('div.underline')
+		.each(function(i, obj){
+			var svg = $('<svg><svg/>').attr('id','underline'+i);
+			$(obj).append(svg);
+		});
 	$.get('report/lastReport/clienteDePrueba', function( data ) {
 		report=data[0].report;
 	}).done(function(){
 		parseReportUsingTableMaker();
 		setStyles();
+		underline();
 		setInteraction();
 	});
 }

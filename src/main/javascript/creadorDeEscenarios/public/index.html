@@ -4,18 +4,21 @@
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="stylesheet" type="text/css" href="css/header.css">
 	<script src="libs/jquery-1.7.2.js"></script>
+	<script src="libs/snap.svg-min.js"></script>
 	<script src="http://mrrio.github.io/jsPDF/dist/jspdf.debug.js"></script>
 	<script src="js/generatepdf.js"></script>
 	<script src="js/tableParser.js"></script>
 	<script src="js/showReport.js"></script>
 </head>
 <body>
-	<div class="header">
-		<img src="imgs/conectividad.svg" style="width: 100%;"/>
-		<img src="imgs/logo.svg" style="position: absolute;top: 1%;height: 10%;margin:10px"/>
+	<div >
+		<img src="imgs/Cabecera.svg" style="width: 100%" />
+		<!--img src="imgs/logo.svg" style="position: absolute;top: 2%;left: 2%;height: 10%;margin:10px"/-->
 	</div>
 	<div id="featuresPart">
-		<h3>Features Probadas</h3>
+		<div class="underline black">
+			<h3>Features Probadas</h3>
+		</div>
 		<table id="featuresTable" width="100%">
 			<tr>
 				<th>Nombre</th>
@@ -23,7 +26,9 @@
 				<th>Tiempo</th>
 			</tr>
 		</table>
-		<h3>Scenarios</h3>
+		<div class="underline black">
+			<h3>Scenarios</h3>
+		</div>
 		<table id="scenariosTable" width="100%">
 			<col width="35%"/>
 			<col span="3" width="20%" style="text-align:center"/>
